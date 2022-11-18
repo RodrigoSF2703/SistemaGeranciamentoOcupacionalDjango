@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="titulo">ATENDIMENTO</div>
+<form class="form-horizontal" method="POST" action="{% url 'atendimento_novo' %}">
+    {% csrf_token %}
+
+    <div class="form6">
+        <div class="form-group">
+            <label for="funcao_id" class="control-label col-sm-3">Empregado:</label>
+            <div class="col-sm-8">
+                <select name="empregado_id" id="empregado_id" required style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected >Selecione</option>
+                {% for empregado in empregados %}
+                       <option value="{{ empregado.id }}" >{{ empregado.nome }}</option>
+                {% endfor %}      	
+                </select> 
+            </div> 
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="data_atendimento">Data:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" required id="data_atendimento" name="data_atendimento">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="funcao_id" class="control-label col-sm-3">Tipo Exame:</label>
+            <div class="col-sm-8">
+                <select name="tipoexame_id" id="tipoexame_id" required style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected >Selecione</option>
+                {% for tipoexame in tipoexames %}
+                       <option value="{{ tipoexame.id }}" >{{ tipoexame.nome }}</option>
+                {% endfor %}      	
+                </select> 
+            </div> 
+        </div>
+
+        <div class="form-group">
+            <div class="form-check">       
+                <label class="control-label col-sm-3" for="altura">Trabalho Altura:</label>
+                <input class="col-sm-1" type="checkbox" name="altura" id="altura">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-check">       
+                <label class="control-label col-sm-3" for="espaco">Espaço Confinado:</label>
+                <input class="col-sm-1" type="checkbox" name="espaco" id="espaco">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-check">       
+                <label class="control-label col-sm-3" for="apto">Apto para Trabalho:</label>
+                <input class="col-sm-1" type="checkbox" name="apto" id="apto">
+            </div>
+        </div>
+
+        
+    </div> 
+
+    {% if messages %}
+        <div class="alert alert-danger">
+            {% for m in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}  
+
+    <div class="botoes">
+        <div class="form-group" style="margin:auto; margin-left:150px;">
+            <Button type = "submit" class = "btn btn-primary btn-lg">
+                <span class = "glyphicon glyphicon-edit" 
+                style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Incluir</span>
+            </Button>                
+        </div>
+    </div>
+
+</form>
+{% endblock %}

@@ -1,0 +1,4 @@
+<option value="" selected >Selecione</option>
+{% for g in grupos %}
+    <option value="{{ g.grupo.id }}" >{{ g.grupo.nome }}</option>
+{% endfor %}

@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE>
+<html lang='pt-br'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Sistema de Gerenciamento Ocupacional</title>
+<link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="topo">
+        <h1>Sistema de Gerenciamento Ocupacional</h1>    
+    </div>
+     
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav navbar-left">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home</a>
+                </li> 
+                <li class="nav-item dropdown dmenu">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Tabelas Básicas
+                    </a>
+                    <div class="dropdown-menu sm-menu">
+                        <a class="dropdown-item" href="/lista_funcoes">Funções</a>
+                        <a class="dropdown-item" href="/lista_setores">Setores</a>
+                        <a class="dropdown-item" href="/lista_tiporiscos">Tipos de Riscos</a>
+                        <a class="dropdown-item" href="/lista_riscos">Riscos</a>
+                        <a class="dropdown-item" href="lista_exames">Exames</a>
+                        <a class="dropdown-item" href="/lista_grupos">Grupos Homogêneos</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-left">
+                <li class="nav-item dropdown dmenu">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Cadastros
+                    </a>
+                    <div class="dropdown-menu sm-menu">
+                        <a class="dropdown-item" href="/lista_empregados">Empregados</a>
+                        <a class="dropdown-item" href="/lista_coords">Coordenador PCMSO</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'lista_atendimentos' %}">Atendimentos</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="accounts/logout">Logout</a>
+                </li>
+            </ul>
+    </nav>
+    {% block content %}
+    
+    {% endblock %}
+    <footer>
+        <h4>Todos os direitos reservados </h4>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="{% static 'js/jquery.mask.min.js' %}"></script>
+
+</body>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.navbar-light .dmenu').hover(function () {
+        $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
+    }, function () {
+        $(this).find('.sm-menu').first().stop(true, true).slideUp(105)
+    });
+    $("#data_atendimento").mask("00/00/0000");
+    $("#data_nascimento").mask("00/00/0000");
+    $("#data_admissao").mask("00/00/0000");
+    $("#data_demissao").mask("00/00/0000");
+    $("#data").mask("00/00/0000");
+    $("#cpf").mask("000.000.000-00");
+});
+  
+ 
+
+</script>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang='pt-br'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<style>
+    h1{ font-size: 20px; color: #000; text-align: center;}
+    h3{ font-size: 18px; text-align:center;}
+    .coluna1{ height:20px; font-size: 14px; border: 1px #333 solid; text-align:left; 
+        vertical-align:middle; padding-top: 4px; padding-left: 4px;}
+
+    .coluna2{ height:20px; font-size: 14px; border: 1px #333 solid; text-align:left; 
+        vertical-align:middle; padding-top: 4px; padding-left: 4px;}
+    
+   p{ font-size:12px; height:20px; text-align:center;}
+</style>
+<body>
+<h1>ATESTADO DE SAÚDE OCUPACIONAL</h1>
+<h3>{{atendimento.tipoexame.nome }}</h3>
+    <table>
+        <tr>
+            <td class="coluna1" width="80">NOME:</td>
+            <td class="coluna2">{{ atendimento.empregado.nome }}</td>
+            <td class="coluna1" width="80">CPF:</td>
+            <td class="coluna2">{{ atendimento.empregado.cpf }}</td>
+        </tr>
+        <tr>
+            <td class="coluna1" width="80">CTPS:</td>
+            <td class="coluna2">{{ atendimento.empregado.ctps }}</td>
+            <td class="coluna1" width="80">SÉRIE:</td>
+            <td class="coluna2">{{ atendimento.empregado.serie }}</td>
+        </tr>
+        <tr>
+            <td class="coluna1" width="80">SETOR:</td>
+            <td class="coluna2">{{ atendimento.setor.nome }}</td>
+            <td class="coluna1" width="80">FUNÇÃO:</td>
+            <td class="coluna2">{{ atendimento.empregado.funcao }}</td>
+        </tr>
+        <tr>
+            <td class="coluna1" width="80" style="border-bottom:1px #333 solid;">NASCIMENTO:</td>
+            <td class="coluna2" colspan="3" style="border-bottom:1px #333 solid;">{{ atendimento.empregado.data_nascimento|date:"d/m/Y" }}</td>
+        </tr>
+    </table>
+    <h3>RISCOS OCUPACIONAIS</h3>
+    {% for risco in riscos %}
+        <p>{{ risco.risco.nome }}</p>
+    {% endfor %}
+    <hr>
+    <p style="text-align: justify;">Atesto para os efeitos da lei 65614 de 22/12/1977, capítulo V da CLT, 
+    portaria 3214 de 08/06/1978 e portaria 8 de 08/05/1996, que o(a) acima referenciado(a), 
+    realizou os exames clínicos e complementares específicos para a função, conforme discriminação abaixo:</p>
+
+    <table>
+        <tr>
+            <td class="coluna1">EXAME:</td>
+            <td class="coluna2">DATA:</td>
+        </tr>
+        {% for exame in exames %}
+        <tr>
+            <td class="coluna1">{{ exame.exame.nome }}</td>
+            <td class="coluna2">{{ atendimento.data_atendimento|date:"d/m/Y" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>&nbsp</p>
+    <p>CONCLUSÃO:</p>
+    {% if atendimento.apto == True %}
+        <h2> (X) APTO PARA A FUNÇÃO:</h2>
+    {% else %}
+        <h2>(X) INAPTO PARA A FUNÇÃO</h2>
+    {% endif %}
+    {% if atendimento.trabalhoaltura == True %}
+        <h2> (X) APTO PARA TRABALHO EM ALTURA:</h2>
+    {% else %}
+        <h2>(X) INAPTO PARA TRABALHO EM ALTURA</h2>
+    {% endif %}
+    {% if atendimento.espacoconfinado == True %}
+        <h2> (X) APTO PARA TRABALHO EM ESPAÇO CONFINADO:</h2>
+    {% else %}
+        <h2>(X) INAPTO PARA TRABALHO EM ESPAÇO CONFINADO</h2>
+    {% endif %}
+
+    <table>
+        <tr>
+            <td class="coluna1" style="border:none;">Rio de Janeiro, {{ atendimento.data|date:"d/m/Y" }}</td>
+            <td class="coluna1" style="border:none; text-align:center">___________________________________________________</td>
+        </tr>
+        <tr>
+            <td class="coluna1" style="border:none;">&nbsp</td>
+            <td class="coluna1" style="border:none; text-align:center">Médico do Trabalho</td>
+        </tr>
+    </table>
+
+    <p>&nbsp</p>
+    <p style="text-align: left;">COORD. PCMSO :  {{ coord.nome }} -  {{ coord.crm }} {{ coord.uf }}</p>
+
+    <p style="text-align: left;">Recebi cópia deste ASO, bem como fui orientado quanto aos resultados dos exames realizados</p>
+    <p style="text-align: left;">_________________________________________________________, ____/____/________</p>
+</body>
+</html>
